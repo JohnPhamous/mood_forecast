@@ -9,6 +9,8 @@ import tweepy, json, re
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Twitter Developer credentials
 API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
@@ -39,3 +41,18 @@ if __name__ == '__main__':
     stream = Stream(auth, listener)
     stream.filter(locations = galvinize)
     # stream.filter(track = ['test'])
+
+
+tweets_data_path = '../data/twitter_data.txt'
+tweets_file = open(tweets_data_path, "r")
+for line in tweets_file:
+	try:
+		tweet = json.loads(line)
+		tweets_data.append(tweet)
+	except:
+		continue
+tweets = pd.DataFrame()
+
+tweets['text'] = map(lambda tweet: tweet['text'], tweets_data)
+tweets['lang'] = map(lambda tweet: tweet['lang'], tweets_data)
+tweets['country'] = map(lambda tweet: tweet['place']['country'] if tweet['place'] != None else None, tweets_data)
