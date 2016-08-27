@@ -1,5 +1,5 @@
 from __future__ import absolute_import, print_function
-import tweepy, json, re
+import tweepy, json, re, Algorithmia
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -12,6 +12,8 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Locations
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
+
+tweet_text = None
 
 def removeNonsense(data_json):
     original_data_json = data_json
@@ -26,10 +28,17 @@ def removeNonsense(data_json):
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
+        global tweet_text
         data_json = json.loads(data)
         tweet_text = removeNonsense(data_json["text"])
         tweet_date = data_json["created_at"][11:19]
         print(tweet_date, tweet_text)
+
+        # Authenticates with Algorithmia
+        client = Algorithmia.client('simMN5+/QIIoGAfFTxZtf9uPjHQ1')
+        algorithm = client.algo('nlp/SocialSentimentAnalysis/0.1.3')
+        results = algorithm.pipe(tweet_text)
+        
         return True
 
     def on_error(self, status):
@@ -44,3 +53,5 @@ if __name__ == '__main__':
     stream = Stream(auth, listener)
     stream.filter(locations = galvinize)
     # stream.filter(track = ['test'])
+
+
