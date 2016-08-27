@@ -14,12 +14,11 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
 
 tweet_text = None
-emoji_pattern = re.compile("["
-        u"\U0001F600-\U0001F64F"  # emoticons
-        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-        u"\U0001F680-\U0001F6FF"  # transport & map symbols
-        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-                           "]+", flags=re.UNICODE)
+emoji_pattern = re.compile(u'['
+    u'\U0001F300-\U0001F64F'
+    u'\U0001F680-\U0001F6FF'
+    u'\u2600-\u26FF\u2700-\u27BF]+', 
+    re.UNICODE) 
 
 def removeNonsense(data_json):
     original_data_json = data_json
