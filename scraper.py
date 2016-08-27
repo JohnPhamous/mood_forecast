@@ -17,11 +17,14 @@ ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
 ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Locations
-galvinize = [37.787601, -122.396643]
+galvinize = [-122.451665,37.757656,-122.364925,37.80439]
+tweet_data = []
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
-        print(data)
+        # print(data)
+        tweet_data = data
+        print(tweet_data[0])
         return True
 
     def on_error(self, status):
@@ -34,5 +37,5 @@ if __name__ == '__main__':
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
     stream = Stream(auth, listener)
-    stream.filter(locations = LOCATION)
+    stream.filter(locations = galvinize)
     # stream.filter(track = ['test'])
