@@ -32,7 +32,16 @@ class StdOutListener(StreamListener):
         data_json = json.loads(data)
         tweet_text = removeNonsense(data_json["text"])
         tweet_date = data_json["created_at"][11:19]
-        print(tweet_date, tweet_text)
+        emoji_pattern = re.compile("["
+        u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                           "]+", flags=re.UNICODE)
+        print(tweet_date, emoji_pattern.sub(r'',text))
+        #print(tweet_date, tweet_text)
+
+        #print(tweet_date, tweet_text)
 
         # Authenticates with Algorithmia
         client = Algorithmia.client('simMN5+/QIIoGAfFTxZtf9uPjHQ1')
