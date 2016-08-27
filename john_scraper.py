@@ -37,8 +37,7 @@ class StdOutListener(StreamListener):
         # Authenticates with Algorithmia
         client = Algorithmia.client('simMN5+/QIIoGAfFTxZtf9uPjHQ1')
         algorithm = client.algo('nlp/SocialSentimentAnalysis/0.1.3')
-        results = algorithm.pipe(tweet_text)
-        
+        print(algorithm.pipe(tweet_text))
         return True
 
     def on_error(self, status):
