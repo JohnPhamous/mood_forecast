@@ -11,6 +11,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 import pandas as pd
 import matplotlib.pyplot as plt
+import json
 
 # Twitter Developer credentials
 API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
@@ -20,13 +21,13 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Locations
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
-tweet_data = {} 
+data_json = None
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
-        print(data)
-        tweet_data = data
-        # print(tweet_data[5])
+        # print(data)
+        data_json = json.loads(data)
+        print("\n", data_json["text"])
         return True
 
     def on_error(self, status):
@@ -41,6 +42,4 @@ if __name__ == '__main__':
     stream = Stream(auth, listener)
     stream.filter(locations = galvinize)
     # stream.filter(track = ['test'])
-    # print("this is the data", tweet_data)
-
 
