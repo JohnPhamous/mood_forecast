@@ -38,7 +38,7 @@ class StdOutListener(StreamListener):
         u"\U0001F680-\U0001F6FF"  # transport & map symbols
         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
                            "]+", flags=re.UNICODE)
-        print(tweet_date, emoji_pattern.sub(r'',text))
+        print(tweet_date, emoji_pattern.sub(r'',tweet_text))
         #print(tweet_date, tweet_text)
 
         #print(tweet_date, tweet_text)
