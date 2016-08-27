@@ -1,18 +1,8 @@
-# Number of tweets per hour throughout the day
-# Mood of the tweet
-# Base off what's trending from twitter
-# TODO: Look into Algorithmia and AlchemyAPI
-
 from __future__ import absolute_import, print_function
-
 import tweepy, json, re
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
-
-from googleapiclient import discovery
-import httplib2
-from oauth2client.client import GoogleCredentials
 
 # Twitter Developer credentials
 API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
