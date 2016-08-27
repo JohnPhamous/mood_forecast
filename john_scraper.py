@@ -9,9 +9,6 @@ import tweepy, json, re
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
-import pandas as pd
-import matplotlib.pyplot as plt
-import json
 
 # Twitter Developer credentials
 API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
@@ -23,11 +20,22 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
 data_json = None
 
+def removeNonsense(data_json):
+    original_data_json = data_json
+    # Removes hashtags
+    data_json = re.sub(r'#\w+ ?', '', data_json)
+    # Removes URLs
+    data_json = re.sub(r'http\S+', '', data_json)
+    # Removes mentions
+    data_json = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z\t])|(\w+:\/\/\S+)"," ",data_json).split())
+    print(data_json)
+
 class StdOutListener(StreamListener):
     def on_data(self, data):
         # print(data)
         data_json = json.loads(data)
-        print("\n", data_json["text"])
+        # print("\n", data_json["text"])
+        removeNonsense(data_json["text"])
         return True
 
     def on_error(self, status):
