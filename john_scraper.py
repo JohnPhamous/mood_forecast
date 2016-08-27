@@ -12,7 +12,11 @@ from tweepy import OAuthHandler
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-
+import nltk
+from nltk.tokenize import sent_tokenize, word_tokenize
+sample = "Hi slash hack"
+print(sent_tokenize(sample))
+print(word_tokenize(sample))
 # Twitter Developer credentials
 API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
 API_SECRET = "mDiSSt9IWQFn8IdZAHE8IeYbyqSmIPoN4hI80ezk2JHl0XVazp"
