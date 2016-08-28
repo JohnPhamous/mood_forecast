@@ -3,6 +3,7 @@ import tweepy, json, re, Algorithmia, plotly
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
+import plotly
 import plotly.plotly as py
 import plotly.tools as tls
 import plotly.graph_objs as go
