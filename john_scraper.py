@@ -14,10 +14,10 @@ ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
 ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Plotly Authentication
-plotly.tools.set_credentials_file(username = "PhamousJ", api_key =
-                                  "csc7od4qv1")
+plotly.tools.set_credentials_file(username = 'PhamousJ', api_key =
+                                  'csc7od4qv1')
 stream_ids = tls.get_credentials_file()['stream_ids']
-print(stream_ids)
+print stream_ids
 # Locations
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
 
