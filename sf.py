@@ -9,10 +9,15 @@ import plotly.tools as tls
 import plotly.graph_objs as go
 
 # Twitter Developer credentials
-API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
+'''API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
 API_SECRET = "mDiSSt9IWQFn8IdZAHE8IeYbyqSmIPoN4hI80ezk2JHl0XVazp"
 ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
-ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
+ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"'''
+
+API_KEY = "ovpYqJo18BnBcl6DjBLMzlfeC"
+API_SECRET = "OrflkgrGhxOS2wvgwYNHxIxP71PcUfxWHY2flJzOm8n5fcoViU"
+ACCESS_TOKEN = "769995297128939521-vHNfFP9Q02v9R6BJTMRwGKQs5wBIqpa"
+ACCESS_TOKEN_SECRET = "VJIENrGfqs19mlMXaoG31NgSQoeuwhGzBnmMtfYFHNA8c"
 
 # Plotly Authentication
 plotly.tools.set_credentials_file(username = 'phamousjohn', api_key = 'oj1oi0f5v8')
