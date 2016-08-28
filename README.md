@@ -9,6 +9,8 @@ With the addition to Amazon's Alexa's platform, we've added a voice interface to
 sers are able to interact with the data with voice controls.
 
 Project Members:
+
+
 John Pham
 Jarren San Jose
 Alberto Tam Yong
