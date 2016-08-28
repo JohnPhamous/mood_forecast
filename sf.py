@@ -25,9 +25,14 @@ trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
 trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =
                     "Average")
 data = go.Data([trace_1, trace_2])
-# layout = go.Layout(title = "San Francisco")
-fig = go.Figure(data = data)
-py.plot(fig, filename = "San Francisco Mood")
+# layout = go.Layout(legend=dict(orientation = "h"))
+layout = go.Layout(showlegend = True, paper_bgcolor = 'rgba(0,0,0,0)',
+                   plot_bgcolor = 'rgba(0,0,0,0)',
+                   legend = dict(x = 0.35, y = 1.25),
+                  xaxis = dict(showgrid = False),
+                  yaxis = dict(showgrid = False))
+fig = go.Figure(data = data, layout = layout)
+py.plot(fig, filename = "SF Mood")
 s = py.Stream(stream_token1)
 s2 = py.Stream(stream_token2)
 s.open()
@@ -81,7 +86,7 @@ class StdOutListener(StreamListener):
             s.write(dict(x = tweet_time, y = current_mood, text = tweet_text))
             s2.write(dict(x = tweet_time, y = mood_average))
             mood += current_mood
-            mood_average = mood / tweet_counter 
+            mood_average = mood / tweet_counter
             print("Average mood out of {}: {}\n".format(tweet_counter, mood_average))
             tweet_counter += 1.0
         else:
@@ -100,5 +105,3 @@ if __name__ == '__main__':
     stream = Stream(auth, listener)
     stream.filter(locations = galvinize)
     # stream.filter(track = ['test'])
-
-

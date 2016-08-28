@@ -15,9 +15,9 @@ ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
 ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Plotly Authentication
-plotly.tools.set_credentials_file(username = 'PhamousJ', api_key = 'csc7od4qv1')
-stream_token1 = '3a8cq5tihp'
-stream_token2 = 'pjzo59k689'
+plotly.tools.set_credentials_file(username = 'phamousjohn', api_key = 'oj1oi0f5v8')
+stream_token1 = 'zmddh8kp6p'
+stream_token2 = 'ff0k3rqm3d'
 stream_1 = dict(token = stream_token1, maxpoints = 200)
 stream_2 = dict(token = stream_token2, maxpoints = 200)
 trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
@@ -25,16 +25,21 @@ trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
 trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =
                     "Average")
 data = go.Data([trace_1, trace_2])
-# layout = go.Layout(title = "San Francisco")
-fig = go.Figure(data = data)
-py.plot(fig, filename = "Los Angeles Mood")
+# layout = go.Layout(legend=dict(orientation = "h"))
+layout = go.Layout(showlegend = True, paper_bgcolor = 'rgba(0,0,0,0)',
+                   plot_bgcolor = 'rgba(0,0,0,0)',
+                   legend = dict(x = 0.35, y = 1.25),
+                  xaxis = dict(showgrid = False),
+                  yaxis = dict(showgrid = False))
+fig = go.Figure(data = data, layout = layout)
+py.plot(fig, filename = "LA Mood")
 s = py.Stream(stream_token1)
 s2 = py.Stream(stream_token2)
 s.open()
 s2.open()
 
 # Locations
-galvinize = [-118.5535,33.7474,-117.4438,34.6014]
+galvinize = [-118.8604,33.5635,-117.0161,34.2035]
 
 tweet_text = None
 tweet_counter = 1.0
@@ -81,7 +86,7 @@ class StdOutListener(StreamListener):
             s.write(dict(x = tweet_time, y = current_mood, text = tweet_text))
             s2.write(dict(x = tweet_time, y = mood_average))
             mood += current_mood
-            mood_average = mood / tweet_counter 
+            mood_average = mood / tweet_counter
             print("Average mood out of {}: {}\n".format(tweet_counter, mood_average))
             tweet_counter += 1.0
         else:
@@ -100,5 +105,3 @@ if __name__ == '__main__':
     stream = Stream(auth, listener)
     stream.filter(locations = galvinize)
     # stream.filter(track = ['test'])
-
-
