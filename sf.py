@@ -18,8 +18,8 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 plotly.tools.set_credentials_file(username = 'PhamousJ', api_key = 'csc7od4qv1')
 stream_token1 = 'rm379jox9i'
 stream_token2 = 'v6hd8bfabe'
-stream_1 = dict(token = stream_token1, maxpoints = 60)
-stream_2 = dict(token = stream_token2, maxpoints = 60)
+stream_1 = dict(token = stream_token1, maxpoints = 200)
+stream_2 = dict(token = stream_token2, maxpoints = 200)
 trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
                     name = "Live Tweets")
 trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =

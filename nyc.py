@@ -18,8 +18,8 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 plotly.tools.set_credentials_file(username = 'PhamousJ', api_key = 'csc7od4qv1')
 stream_token1 = 'rm379jox9i'
 stream_token2 = 'v6hd8bfabe'
-stream_1 = dict(token = stream_token1, maxpoints = 60)
-stream_2 = dict(token = stream_token2, maxpoints = 60)
+stream_1 = dict(token = stream_token1, maxpoints = 200)
+stream_2 = dict(token = stream_token2, maxpoints = 200)
 trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
                     name = "Live Tweets")
 trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =
@@ -27,14 +27,14 @@ trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =
 data = go.Data([trace_1, trace_2])
 # layout = go.Layout(title = "San Francisco")
 fig = go.Figure(data = data)
-py.plot(fig, filename = "San Francisco Mood")
+py.plot(fig, filename = "NYC Mood")
 s = py.Stream(stream_token1)
 s2 = py.Stream(stream_token2)
 s.open()
 s2.open()
 
 # Locations
-galvinize = [-122.53126,37.587575,-122.330704,37.823632]
+galvinize = [-74.86,40.46,-73.75,41.24]
 
 tweet_text = None
 tweet_counter = 1.0
