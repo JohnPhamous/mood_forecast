@@ -10,6 +10,8 @@ Different relations can be drawn from this such as a drop in our "mood quotient"
 With the addition to Amazon's Alexa's platform, we've added a voice interface to our platform. U
 sers are able to interact with the data with voice controls.
 
+https://johnphamous.github.io/mood_forecast/mood_forecast_website/
+
 
 Project Members:
 
