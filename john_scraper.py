@@ -14,6 +14,8 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
 
 tweet_text = None
+tweet_counter = 0
+mood_average = None
 
 def removeNonsense(data_json):
     original_data_json = data_json
@@ -31,16 +33,17 @@ class StdOutListener(StreamListener):
         data_json = json.loads(data)
         tweet_text = removeNonsense(data_json["text"])
         tweet_date = data_json["created_at"][11:19]
-        # print(tweet_date, tweet_text)
+        print(tweet_text)
 
         # Authenticates with Algorithmia
         client = Algorithmia.client('simMN5+/QIIoGAfFTxZtf9uPjHQ1')
         algorithm = client.algo('nlp/SocialSentimentAnalysis/0.1.3')
-        text_formatted = '{"sentence": tweet_text}'
-        # analyzed_text = algorithm.pipe(tweet_text.encode("utf-8"))
-        print(analyzed_text = algorithm.pipe(text_formatted))
+        text_formatted = '{"sentence":' +  tweet_text + '}'
+        analyzed_text = algorithm.pipe(text_formatted.encode("utf-8"))
+        # analyzed_text = algorithm.pipe(text_formatted)
+        # print(analyzed_text)
         analyzed_text_dict = analyzed_text[0]
-        # print(analyzed_text_dict.items()[4][1])
+        print(analyzed_text_dict.items()[4][1])
         return True
 
     def on_error(self, status):
