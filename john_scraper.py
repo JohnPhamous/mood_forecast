@@ -14,11 +14,6 @@ ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
 
 tweet_text = None
-emoji_pattern = re.compile(u'['
-    u'\U0001F300-\U0001F64F'
-    u'\U0001F680-\U0001F6FF'
-    u'\u2600-\u26FF\u2700-\u27BF]+', 
-    re.UNICODE) 
 
 def removeNonsense(data_json):
     original_data_json = data_json
@@ -28,9 +23,6 @@ def removeNonsense(data_json):
     data_json = re.sub(r'http\S+', '', data_json)
     # Removes mentions
     data_json = ' '.join(re.sub("(@[A-Za-z0-9]+)|(\w+:\/\/\S+)"," ",data_json).split())
-    data_json = emoji_pattern.sub(r'',tweet_text)
-    data_json = re.sub(r''.tweet_text)
-    # data_json = ' '.join(re.sub("(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+) "," ",data_json).split())
     return data_json
 
 class StdOutListener(StreamListener):
@@ -39,14 +31,16 @@ class StdOutListener(StreamListener):
         data_json = json.loads(data)
         tweet_text = removeNonsense(data_json["text"])
         tweet_date = data_json["created_at"][11:19]
-        print(tweet_date, tweet_text)
-
-        #print(tweet_date, tweet_text)
+        # print(tweet_date, tweet_text)
 
         # Authenticates with Algorithmia
         client = Algorithmia.client('simMN5+/QIIoGAfFTxZtf9uPjHQ1')
         algorithm = client.algo('nlp/SocialSentimentAnalysis/0.1.3')
-        print(algorithm.pipe(tweet_text))
+        text_formatted = '{"sentence": tweet_text}'
+        # analyzed_text = algorithm.pipe(tweet_text.encode("utf-8"))
+        print(analyzed_text = algorithm.pipe(text_formatted))
+        analyzed_text_dict = analyzed_text[0]
+        # print(analyzed_text_dict.items()[4][1])
         return True
 
     def on_error(self, status):
