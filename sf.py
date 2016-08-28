@@ -15,9 +15,9 @@ ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
 ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Plotly Authentication
-plotly.tools.set_credentials_file(username = 'PhamousJ', api_key = 'csc7od4qv1')
-stream_token1 = 'rm379jox9i'
-stream_token2 = 'v6hd8bfabe'
+plotly.tools.set_credentials_file(username = 'phamousjohn', api_key = 'oj1oi0f5v8')
+stream_token1 = '705a3e0tc8'
+stream_token2 = 'sk52x1clx9'
 stream_1 = dict(token = stream_token1, maxpoints = 200)
 stream_2 = dict(token = stream_token2, maxpoints = 200)
 trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
