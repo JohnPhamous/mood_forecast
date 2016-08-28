@@ -21,9 +21,9 @@ stream_token2 = '103e5hley3'
 stream_1 = dict(token = stream_token1, maxpoints = 200)
 stream_2 = dict(token = stream_token2, maxpoints = 200)
 trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
-                    name = "Live Tweets")
+                    name = "Live Tweets", marker = dict(color = 'rgba(0, 0, 255, 0.5)'))
 trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =
-                    "Average")
+                    "Average", marker = dict(color = 'rgba(255, 0, 0, 1)'))
 data = go.Data([trace_1, trace_2])
 # layout = go.Layout(legend=dict(orientation = "h"))
 layout = go.Layout(showlegend = True, paper_bgcolor = 'rgba(0,0,0,0)',
