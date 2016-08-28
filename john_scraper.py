@@ -1,5 +1,5 @@
 from __future__ import absolute_import, print_function
-import tweepy, json, re, Algorithmia, plotly
+import tweepy, json, re, Algorithmia
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -15,18 +15,32 @@ ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
 ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
 # Plotly Authentication
-plotly.tools.set_credentials_file(username = 'PhamousJ', api_key =
-                                  'csc7od4qv1')
-stream_ids = tls.get_credentials_file()['stream_ids']
+plotly.tools.set_credentials_file(username = 'PhamousJ', api_key = 'csc7od4qv1')
+stream_token1 = 'rm379jox9i'
+stream_token2 = 'v6hd8bfabe'
+stream_1 = dict(token = stream_token1, maxpoints = 60)
+stream_2 = dict(token = stream_token2, maxpoints = 60)
+trace_1 = go.Scatter(x = [], y = [], mode = 'lines+markers', stream = stream_1,
+                    name = "Live Tweets")
+trace_2 = go.Scatter(x = [], y = [], mode = 'lines', stream = stream_2, name =
+                    "Average")
+data = go.Data([trace_1, trace_2])
+layout = go.Layout(title = "San Francisco")
+fig = go.Figure(data = data, layout = layout)
+py.plot(fig, filename = "San Francisco Mood")
+s = py.Stream(stream_token1)
+s2 = py.Stream(stream_token2)
+s.open()
+s2.open()
 
-print (stream_ids)
 # Locations
-galvinize = [-122.451665,37.757656,-122.364925,37.80439]
+galvinize = [-122.53126,37.587575,-122.330704,37.823632]
 
 tweet_text = None
 tweet_counter = 1.0
+tweet_time = None
 mood = 0.0
-mood_average = None
+mood_average = 0.0
 
 def removeNonsense(data_json):
     original_data_json = data_json
@@ -42,12 +56,13 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         global tweet_text
         global tweet_counter
+        global tweet_time
         global mood_average
         global mood
 
         data_json = json.loads(data)
         tweet_text = removeNonsense(data_json["text"])
-        tweet_date = data_json["created_at"][11:19]
+        tweet_time = data_json["created_at"][11:19]
 
         # Authenticates with Algorithmia
         client = Algorithmia.client('simMN5+/QIIoGAfFTxZtf9uPjHQ1')
@@ -58,18 +73,18 @@ class StdOutListener(StreamListener):
         # print(analyzed_text)
         analyzed_text_dict = analyzed_text[0]
         print("Tweet:", tweet_text)
+        print("Time:", tweet_time)
         current_mood = analyzed_text_dict.items()[4][1]
         print("Current mood:", current_mood)
         if current_mood != 0:
+            s.write(dict(x = tweet_time, y = current_mood, text = tweet_text))
+            s2.write(dict(x = tweet_time, y = mood_average))
             mood += current_mood
             mood_average = mood / tweet_counter 
             print("Average mood out of {}: {}\n".format(tweet_counter, mood_average))
             tweet_counter += 1.0
         else:
             print("Tweet is ignored: too short or made no sense\n")
-        
-        # Plotly streaming
-        
         return True
 
     def on_error(self, status):
