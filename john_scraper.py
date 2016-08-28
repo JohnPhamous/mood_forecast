@@ -1,8 +1,11 @@
 from __future__ import absolute_import, print_function
-import tweepy, json, re, Algorithmia
+import tweepy, json, re, Algorithmia, plotly
 from tweepy import Stream
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
+import plotly.plotly as py
+import plotly.tools as tls
+import plotly.graph_objs as go
 
 # Twitter Developer credentials
 API_KEY = "UoxZJjMB30XE9ox7PBZe1qqbZ"
@@ -10,6 +13,11 @@ API_SECRET = "mDiSSt9IWQFn8IdZAHE8IeYbyqSmIPoN4hI80ezk2JHl0XVazp"
 ACCESS_TOKEN = "115831938-Nfbk74K0xheWpWyGN4Cl2Vs9shcRl9CJ3gUdwZYV"
 ACCESS_TOKEN_SECRET = "rmPh9burqeUOvzcvE1T2pkQAzkuN3bVxjfUnH4mfi4M2J"
 
+# Plotly Authentication
+plotly.tools.set_credentials_file(username = "PhamousJ", api_key =
+                                  "csc7od4qv1")
+stream_ids = tls.get_credentials_file()['stream_ids']
+print(stream_ids)
 # Locations
 galvinize = [-122.451665,37.757656,-122.364925,37.80439]
 
@@ -57,6 +65,9 @@ class StdOutListener(StreamListener):
             tweet_counter += 1.0
         else:
             print("Tweet is ignored: too short or made no sense\n")
+        
+        # Plotly streaming
+        
         return True
 
     def on_error(self, status):
